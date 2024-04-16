@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+	<meta charset="UTF-8" th:remove="tag">
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<form th:action="@{/admin}" th:object="${tweet}" method="post">
+			<ul th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
+				<li th:each="err : ${#fields.errors('*')}">
+					<span th:text="${err}"></span>
+				</li>
+			</ul>
+			<div class="form-group">
+				<input type="hidden" th:field="*{id}">
+				<input type="hidden" th:field="*{user}">
+				<textarea rows="3" cols="40" class="tweet-form" id="body" name="body" th:field="*{body}"
+					th:classappend="${#fields.hasErrors('body')} ? error"></textarea>
+			</div>
+			<div>
+				<input class="btn btn-primary" type="submit" value="つぶやく">
+			</div>
+		</form>
+		<div class="tweet-block" th:each="tweetInfo: ${tweetList}" th:object="${tweetInfo}">
+			<div class="tweet line">
+				<a th:href="@{/admin/userTweet/{id}(id=*{userId})}" th:text="*{nickname}" />
+				<td th:if="!*{isFavorite}"><a th:href="@{/admin/favorites/create/{id}(id=*{id})}"
+						class="navlink">お気に入りに追加</a></td>
+			</div>
+			<div class="tweet" th:text="*{body}" />
+			<div class="tweet">
+				<a th:href="@{/admin/detail/{id}(id=*{id})}" th:text="*{createdAt}" />
+			</div>
+			<hr class="hr1">
+		</div>
+	</div>
+</body>
+
+</html>

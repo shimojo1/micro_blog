@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	padding: 0;
+	color: #000000;
+}
+
+a {
+	color: #3399CC;
+}
+
+.header {
+	background-color: #DDDDDD;
+	padding: 10px;
+	border-bottom: 3px solid #CCCCCC;
+}
+
+.header h1 a:hover {
+	background-color: #BBBBBB;
+}
+
+.nav {
+	margin: 0 30px;
+}
+
+.navlink {
+	padding: 8px 16px;
+}
+
+label {
+	width: 200px;
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+.form-area {
+	width: 300px;
+}
+
+.submit-btn {
+	margin: 10px 0 0 200px;
+}
+
+.tweet-form {
+	width: 400px;
+	height: 100px;
+}
+
+.tweet-block {
+	margin-top: 20px;
+}
+
+.tweet {
+	width: 400px;
+	margin-bottom: 10px;
+}
+
+.line {
+	display: inline-block;
+}
+
+table {
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+table th {
+	background-color: #ddd;
+	width: 100px;
+}
+
+table th,
+tr td {
+	border: 2px solid #000;
+}
+
+th,
+td {
+	padding: 10px 5px;
+}

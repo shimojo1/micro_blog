@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+
+<head>
+	<meta charset="UTF-8" th:remove="tag">
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<form th:action="@{/users/create}" th:object="${userForm}" method="post">
+			<ul th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
+				<li th:each="err : ${#fields.errors('*')}">
+					<span th:text="${err}"></span>
+				</li>
+			</ul>
+			<p>新規ユーザ登録</p>
+			<div class="form-group" th:classappend="${#fields.hasErrors('mail')} ? error">
+				<label for="mail">メールアドレス(ユーザID)</label>
+				<input class="form-area" type="text" th:field="*{mail}">
+			</div>
+			<div class="form-group" th:classappend="${#fields.hasErrors('password')} ? error">
+				<label for="password">パスワード</label>
+				<input class="form-area" type="password" th:field="*{password}">
+			</div>
+			<div class="form-group" th:classappend="${#fields.hasErrors('confrimPassword')} ? error">
+				<label for="password">パスワード(再認証)</label>
+				<input class="form-area" type="password" th:field="*{confrimPassword}">
+			</div>
+			<div class="form-group" th:classappend="${#fields.hasErrors('nickname')} ? error">
+				<label for="nickname">ニックネーム</label>
+				<input class="form-area" type="text" th:field="*{nickname}">
+			</div>
+			<div>
+				<input class="btn btn-primary submit-btn" type="submit" value="登録">
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>

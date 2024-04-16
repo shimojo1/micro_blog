@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+
+<head>
+	<meta charset="UTF-8" th:remove="tag">
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<form th:action="@{/admin/users/edit}" th:object="${user}" method="post">
+			<input type="hidden" id="mail" th:field="*{mail}">
+			<ul th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
+				<li th:each="err : ${#fields.errors('*')}">
+					<span th:text="${err}"></span>
+				</li>
+			</ul>
+			<p>ユーザ情報更新</p>
+			<table>
+				<tbody>
+					<tr>
+						<th>ユーザ名</th>
+						<td><label for="mail" th:text="*{mail}" />
+						</td>
+					</tr>
+					<tr>
+						<th>ニックネーム</th>
+						<td>
+							<input class="form-control" type="text" id="nickname" th:field="*{nickname}">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<input class="btn btn-primary" type="submit" value="更新">
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>
