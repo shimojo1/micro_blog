@@ -13,7 +13,7 @@
 			<div class="tweet line">
 				<a th:href="@{/admin/userTweet/{id}(id=*{userId})}" th:text="*{nickname}" />
 				<td th:if="!*{isFavorite}"><a th:href="@{/admin/favorites/create/{id}(id=*{id})}"
-						class="nav-link">お気に入りに追加</a></td>
+						class="navlink">お気に入りに追加</a></td>
 			</div>
 			<div class="tweet" th:text="*{body}" />
 			<div class="tweet">

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.common.CustomUser;
 import com.example.demo.common.FlashData;
-import com.example.demo.common.UserImpl;
 import com.example.demo.entity.Follow;
 import com.example.demo.entity.User;
 import com.example.demo.service.FollowService;
@@ -30,7 +30,7 @@ public class FollowController {
 	 */
 	@GetMapping(value = "/create/{userId}")
 	public String register(@PathVariable Integer userId, Model model, RedirectAttributes ra,
-			@AuthenticationPrincipal UserImpl user) {
+			@AuthenticationPrincipal CustomUser user) {
 		FlashData flash;
 		try {
 			User loginUser = user.getUser();
@@ -40,6 +40,25 @@ public class FollowController {
 			// 新規登録
 			followService.save(follow);
 			flash = new FlashData().success("フォローしました");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			flash = new FlashData().danger("処理中にエラーが発生しました");
+		}
+		ra.addFlashAttribute("flash", flash);
+		return "redirect:/admin/users/list";
+	}
+	
+	/*
+	 * フォロー解除
+	 */
+	@GetMapping(value = "/delete/{userId}")
+	public String delete(@PathVariable Integer userId, Model model, RedirectAttributes ra,
+			@AuthenticationPrincipal CustomUser user) {
+		FlashData flash;
+		try {
+			User loginUser = user.getUser();
+			followService.deleteByUserIdAndFollowUserId(loginUser.getId(), userId);
+			flash = new FlashData().success("フォロー解除しました");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			flash = new FlashData().danger("処理中にエラーが発生しました");

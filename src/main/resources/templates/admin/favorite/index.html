@@ -12,12 +12,12 @@
 		<div class="tweet-block" th:each="favorite: ${favoriteList}" th:object="${favorite}">
 			<div class="tweet line">
 				<a th:href="@{/admin/userTweet/{id}(id=*{tweet.user.id})}" th:text="*{tweet.user.nickname}" />
-				<a th:href="@{/admin/favorites/delete/{id}(id=*{id})}" class="navlink">お気に入りに解除</a>
+				<a th:href="@{/admin/favorites/delete/{id}(id=*{id})}" class="navlink">お気に入り解除</a>
 			</div>
 			<div class="tweet" th:text="*{tweet.body}" />
 			<div class="tweet">
 				<a th:href="@{/admin/detail/{id}(id=*{tweet.id})}"
-					th:text="*{#dates.format(user.modifiedAt, 'yyyy年MM月dd日HH時mm分ss秒')}" />
+					th:text="*{#dates.format(tweet.createdAt, 'yyyy年MM月dd日HH時mm分ss秒')}" />
 			</div>
 			<hr class="hr1">
 		</div>

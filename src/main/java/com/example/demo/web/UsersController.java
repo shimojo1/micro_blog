@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.common.DataNotFoundException;
 import com.example.demo.common.FlashData;
-import com.example.demo.common.UserImpl;
+import com.example.demo.common.CustomUser;
 import com.example.demo.common.ValidationGroups.Create;
 import com.example.demo.common.ValidationGroups.Update;
 import com.example.demo.domain.UserInfo;
@@ -85,7 +85,7 @@ public class UsersController {
 	 * ユーザ一覧画面表示
 	 */
 	@GetMapping(value = "/list")
-	public String list(Model model, @AuthenticationPrincipal UserImpl user) {
+	public String list(Model model, @AuthenticationPrincipal CustomUser user) {
 		List<UserInfo> userList = new ArrayList<UserInfo>();
 		List<User> users = userService.findByIdNot(user.getUser().getId());
 

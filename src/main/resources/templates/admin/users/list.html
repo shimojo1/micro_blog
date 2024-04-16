@@ -23,7 +23,7 @@
 					<td th:text="*{nickname}"></td>
 					<td th:text="*{followCount}"></td>
 					<td th:text="*{followerCount}"></td>
-					<td th:if="*{isFollow}">フォロー中</td>
+					<td th:if="*{isFollow}"><span>フォロー中</span>&nbsp;&nbsp;<a th:href="@{/admin/follow/delete/{id}(id=*{id})}">フォロー解除</a></td>
 					<td th:if="!*{isFollow}"><a th:href="@{/admin/follow/create/{id}(id=*{id})}">フォローする</a></td>
 				</tr>
 			</tbody>

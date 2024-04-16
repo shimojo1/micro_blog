@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.common.DataNotFoundException;
 import com.example.demo.common.PasswordHasher;
-import com.example.demo.common.UserImpl;
+import com.example.demo.common.CustomUser;
 import com.example.demo.dao.UserDao;
 import com.example.demo.entity.User;
 
@@ -75,7 +75,7 @@ public class UserService implements BaseService<User> {
 	 * SpringSecurity側の更新 
 	 */
 	private void updateSecurityContext(User user) {
-		UserDetails userDetails = new UserImpl(user.getMail(), user.getPassword(), user);
+		UserDetails userDetails = new CustomUser(user.getMail(), user.getPassword(), user);
 		SecurityContext context = SecurityContextHolder.getContext();
 		context.setAuthentication(new UsernamePasswordAuthenticationToken(
 				userDetails,

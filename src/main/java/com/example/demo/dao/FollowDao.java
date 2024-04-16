@@ -38,4 +38,8 @@ public class FollowDao implements BaseDao<Follow> {
 			System.out.println("no data");
 		}
 	}
+
+    public void deleteByUserIdAndFollowUserId(Integer userId, Integer followUserId) {
+		this.repository.deleteByUserIdAndFollowUserId(userId, followUserId);
+    }
 }

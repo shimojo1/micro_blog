@@ -55,20 +55,20 @@ public class TweetService implements BaseService<Tweet> {
 
 	public TweetInfo exchangeTweetInfo(Tweet tweet, Integer userId) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日HH時mm分ss秒");
-		Boolean isForvarite = false;
+		Boolean isFavorite = false;
 		TweetInfo tweetInfo = new TweetInfo();
 		tweetInfo.setId(tweet.getId());
 		tweetInfo.setUserId(tweet.getUser().getId());
 		tweetInfo.setNickname(tweet.getUser().getNickname());
 		tweetInfo.setBody(tweet.getBody());
 		tweetInfo.setCreatedAt(dateFormat.format(tweet.getCreatedAt()));
-		for (var forvarite : tweet.getFavorite()) {
-			if (forvarite.getUser().getId() == userId) {
-				isForvarite = true;
+		for (var favorite : tweet.getFavorite()) {
+			if (favorite.getUser().getId() == userId) {
+				isFavorite = true;
 				break;
 			}
 		}
-		tweetInfo.setIsFavorite(isForvarite);
+		tweetInfo.setIsFavorite(isFavorite);
 		return tweetInfo;
 	}
 }

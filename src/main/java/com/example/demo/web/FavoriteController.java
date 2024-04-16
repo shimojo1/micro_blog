@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.common.CustomUser;
 import com.example.demo.common.DataNotFoundException;
 import com.example.demo.common.FlashData;
-import com.example.demo.common.UserImpl;
 import com.example.demo.entity.Favorite;
 import com.example.demo.entity.Tweet;
 import com.example.demo.entity.User;
@@ -35,7 +35,7 @@ public class FavoriteController {
 	 * お気に入り一覧画面
 	 */
 	@GetMapping(value = "/")
-	public String index(Model model, @AuthenticationPrincipal UserImpl user) {
+	public String index(Model model, @AuthenticationPrincipal CustomUser user) {
 		User loginUser = user.getUser();
 		model.addAttribute("favoriteList", favoriteService.findByUserId(loginUser.getId()));
 		return "admin/favorite/index";
@@ -46,7 +46,7 @@ public class FavoriteController {
 	 */
 	@GetMapping(value = "/create/{tweetId}")
 	public String register(@PathVariable Integer tweetId, Model model, RedirectAttributes ra,
-			@AuthenticationPrincipal UserImpl user) {
+			@AuthenticationPrincipal CustomUser user) {
 		FlashData flash;
 		try {
 			Tweet tweet = tweetService.findById(tweetId);
@@ -56,7 +56,7 @@ public class FavoriteController {
 			favorite.setUser(loginUser);
 			// 新規登録
 			favoriteService.save(favorite);
-			flash = new FlashData().success("新規作成しました");
+			flash = new FlashData().success("お気に入りに追加しました");
 		} catch (Exception e) {
 			flash = new FlashData().danger("処理中にエラーが発生しました");
 		}
