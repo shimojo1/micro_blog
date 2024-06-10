@@ -9,7 +9,9 @@ public interface BaseDao<T> {
 
 	public T findById(Integer id) throws DataNotFoundException;
 
-	public void save(T t);
+	public void insert(T t);
+	
+	public void update(T t);
 
 	public void deleteById(Integer id);
 }

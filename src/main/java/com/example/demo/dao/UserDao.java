@@ -2,6 +2,8 @@ package com.example.demo.dao;
 
 import java.util.List;
 
+import com.example.demo.dto.UserDto;
+import com.example.demo.mapper.UsersMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +15,9 @@ import com.example.demo.repository.UserRepository;
 public class UserDao implements BaseDao<User> {
 	@Autowired
 	UserRepository repository;
+	
+	@Autowired
+	UsersMapper usersMapper;
 
 	@Override
 	public List<User> findAll() {
@@ -20,8 +25,14 @@ public class UserDao implements BaseDao<User> {
 	}
 
 	@Override
-	public User findById(Integer id) throws DataNotFoundException {
-		return this.repository.findById(id).orElseThrow(() -> new DataNotFoundException());
+	public User findById(Integer id)  {
+		UserDto user = usersMapper.findById(id);
+		User userObj = new User();
+		userObj.setId(user.getId());
+		userObj.setMail(user.getMail());
+		userObj.setNickname(user.getNickname());
+		
+		return userObj;
 	}
 
 	public List<User> findByIdNot(Integer id) {
@@ -29,7 +40,12 @@ public class UserDao implements BaseDao<User> {
 	}
 
 	@Override
-	public void save(User user) {
+	public void insert(User user) {
+		this.repository.save(user);
+	}
+
+	@Override
+	public void update(User user) {
 		this.repository.save(user);
 	}
 
@@ -37,9 +53,10 @@ public class UserDao implements BaseDao<User> {
 	public void deleteById(Integer id) {
 		try {
 			User user = this.findById(id);
-			this.repository.deleteById(user.getId());
-		} catch (DataNotFoundException e) {
-			System.out.println("no data");
+			usersMapper.deleteById(user.getId());
+		} catch (Exception e) {
+			System.out.println("userDao_deleteById_error");
+			throw e;
 		}
 	}
 

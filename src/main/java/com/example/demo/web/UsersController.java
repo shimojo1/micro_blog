@@ -68,7 +68,7 @@ public class UsersController {
 			user.setMail(userForm.getMail());
 
 			// 新規登録
-			userService.save(user);
+			userService.insert(user);
 			flash = new FlashData().success("新規作成しました");
 
 			// メール送信
@@ -147,7 +147,7 @@ public class UsersController {
 			}
 			// リクエスト値とマージ
 			authUser.setNickname(user.getNickname());
-			userService.save(authUser);
+			userService.update(authUser);
 			flash = new FlashData().success("更新しました");
 		} catch (DataNotFoundException e) {
 			flash = new FlashData().danger("該当データがありません!");

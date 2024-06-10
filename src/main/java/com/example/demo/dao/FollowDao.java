@@ -25,7 +25,12 @@ public class FollowDao implements BaseDao<Follow> {
 	}
 
 	@Override
-	public void save(Follow follow) {
+	public void insert(Follow follow) {
+		this.repository.save(follow);
+	}
+
+	@Override
+	public void update(Follow follow) {
 		this.repository.save(follow);
 	}
 

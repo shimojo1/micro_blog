@@ -46,7 +46,7 @@ public class FavoriteController {
 	 */
 	@GetMapping(value = "/create/{tweetId}")
 	public String register(@PathVariable Integer tweetId, Model model, RedirectAttributes ra,
-			@AuthenticationPrincipal CustomUser user) {
+			@AuthenticationPrincipal CustomUser user) throws DataNotFoundException {
 		FlashData flash;
 		try {
 			Tweet tweet = tweetService.findById(tweetId);
@@ -55,10 +55,11 @@ public class FavoriteController {
 			favorite.setTweet(tweet);
 			favorite.setUser(loginUser);
 			// 新規登録
-			favoriteService.save(favorite);
+			favoriteService.insert(favorite);
 			flash = new FlashData().success("お気に入りに追加しました");
 		} catch (Exception e) {
-			flash = new FlashData().danger("処理中にエラーが発生しました");
+			throw e;
+//			flash = new FlashData().danger("処理中にエラーが発生しました");
 		}
 		ra.addFlashAttribute("flash", flash);
 		return "redirect:/admin/favorites/";

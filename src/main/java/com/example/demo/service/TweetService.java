@@ -36,9 +36,15 @@ public class TweetService implements BaseService<Tweet> {
 	}
 
 	@Override
-	public void save(Tweet tweet) {
-		dao.save(tweet);
+	public void insert(Tweet tweet) {
+		dao.insert(tweet);
 	}
+	
+	@Override
+	public void update(Tweet tweet) {
+		dao.update(tweet);
+	}
+	
 
 	@Override
 	public void deleteById(Integer id) {

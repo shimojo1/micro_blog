@@ -38,7 +38,7 @@ public class FollowController {
 			follow.setFollowUserId(userId);
 			follow.setUserId(loginUser.getId());
 			// 新規登録
-			followService.save(follow);
+			followService.insert(follow);
 			flash = new FlashData().success("フォローしました");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

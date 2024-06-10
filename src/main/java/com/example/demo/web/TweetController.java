@@ -64,7 +64,7 @@ public class TweetController {
 				return "admin/tweet/index";
 			}
 			// 新規登録
-			tweetService.save(tweet);
+			tweetService.insert(tweet);
 			flash = new FlashData().success("新規作成しました");
 		} catch (Exception e) {
 			flash = new FlashData().danger("処理中にエラーが発生しました");

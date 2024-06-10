@@ -25,8 +25,13 @@ public class FollowService implements BaseService<Follow> {
 	}
 
 	@Override
-	public void save(Follow follow) {
-		dao.save(follow);
+	public void insert(Follow follow) {
+		dao.insert(follow);
+	}
+
+	@Override
+	public void update(Follow follow) {
+		dao.update(follow);
 	}
 
 	@Override

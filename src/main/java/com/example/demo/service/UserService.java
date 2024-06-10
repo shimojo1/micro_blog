@@ -35,9 +35,15 @@ public class UserService implements BaseService<User> {
 	}
 
 	@Override
-	public void save(User user) {
+	public void insert(User user) {
 		updateSecurityContext(user);
-		dao.save(user);
+		dao.insert(user);
+	}
+
+	@Override
+	public void update(User user) {
+		updateSecurityContext(user);
+		dao.update(user);
 	}
 
 	@Override
